@@ -11,5 +11,11 @@
 
     <artifactId>eshop-service</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>william</groupId>
+            <artifactId>eshop-common</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

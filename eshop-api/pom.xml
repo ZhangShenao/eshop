@@ -11,5 +11,14 @@
 
     <artifactId>eshop-api</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>william</groupId>
+            <artifactId>eshop-service</artifactId>
+        </dependency>
+    </dependencies>
 </project>
