@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import william.eshop.mapper.UserMapper;
 import william.eshop.model.User;
+import william.eshop.param.UserParam;
 import william.eshop.service.UserService;
 
 /**
@@ -27,5 +28,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean existsByUsername(String username) {
         return queryByUsername(username).isPresent();
+    }
+
+    @Override
+    public User register(UserParam param) {
+        User user = param.toDefaultModel();
+        userMapper.insert(user);
+        return user;
     }
 }

@@ -7,7 +7,10 @@ package william.eshop.rest;
  */
 public enum ResultCode {
     SUCCESS(0, "SUCCESS"),
-    INVALID_PARAM(1, "INVALID_PARAM"),
+    INVALID_PARAM(1, "非法参数"),
+    EMPTY_USERNAME_OR_PASSWORD(2, "用户名或密码为空"),
+    PASSWORD_NOT_MATCH(3, "两次输入密码不一致"),
+    PASSWORD_TOO_SHORT(4, "密码长度过短"),
     ;
 
     private int code;
