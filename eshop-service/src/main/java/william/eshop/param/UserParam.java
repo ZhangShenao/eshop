@@ -14,6 +14,8 @@ import java.util.UUID;
 
 import org.springframework.util.StringUtils;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import william.eshop.model.User;
 import william.eshop.rest.ResultCode;
@@ -26,9 +28,15 @@ import william.eshop.utils.MD5Utils;
  * @Description 用户请求参数
  */
 @Data
+@ApiModel(value = "UserParam", description = "用户请求参数")
 public class UserParam {
+    @ApiModelProperty(value = "用户名", name = "username", required = true)
     private String username;
+
+    @ApiModelProperty(value = "密码", name = "password", required = true)
     private String password;
+
+    @ApiModelProperty(value = "确认密码", name = "confirmPassword", required = true)
     private String confirmPassword;
 
     public ResultCode validate() {

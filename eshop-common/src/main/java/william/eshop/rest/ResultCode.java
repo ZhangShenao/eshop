@@ -11,6 +11,7 @@ public enum ResultCode {
     EMPTY_USERNAME_OR_PASSWORD(2, "用户名或密码为空"),
     PASSWORD_NOT_MATCH(3, "两次输入密码不一致"),
     PASSWORD_TOO_SHORT(4, "密码长度过短"),
+    USER_EXISTS(5, "用户已存在"),
     ;
 
     private int code;
