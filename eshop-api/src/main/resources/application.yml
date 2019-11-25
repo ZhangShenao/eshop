@@ -30,3 +30,5 @@ spring:
 mybatis:
   type-aliases-package: william.eshop.service.model    # 所有Model类所在包路径
   mapper-locations: classpath:mapper/*.xml             # mapper映射文件路径
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # MyBatis打印SQL语句

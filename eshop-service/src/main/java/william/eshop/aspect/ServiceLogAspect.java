@@ -2,8 +2,6 @@ package william.eshop.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,8 +10,8 @@ import lombok.extern.slf4j.Slf4j;
  * @Date 2019-11-25
  * @Description 打印Service方法日志的切面
  */
-@Aspect
-@Component
+//@Aspect
+//@Component
 @Slf4j
 public class ServiceLogAspect {
     @Around("execution(* william.eshop.service.impl..*.*(..))")

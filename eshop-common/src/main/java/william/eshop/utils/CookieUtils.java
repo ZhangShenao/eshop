@@ -23,6 +23,10 @@ public class CookieUtils {
         doSetCookie(response, cookieKey, cookieValue, DEFAULT_PATH, DEFAULT_EXPIRE, false);
     }
 
+    public static void removeCookie(HttpServletResponse response, String cookieKey) {
+        doSetCookie(response, cookieKey, null, DEFAULT_PATH, DEFAULT_EXPIRE, false);
+    }
+
     private static void doSetCookie(HttpServletResponse response, String cookieKey,
             String cookieValue, String path, int maxAge, boolean encoded) {
         try {

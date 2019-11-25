@@ -64,7 +64,7 @@ public class PassportController {
         return CommonRestResponse.ok();
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     @ApiOperation(value = "用户登录", httpMethod = "POST")
     public CommonRestResponse login(@RequestBody UserParam param, HttpServletResponse response) {
         String username = param.getUsername();
@@ -83,5 +83,13 @@ public class PassportController {
         //将userId保存在Cookie中
         CookieUtils.setCookie(response, USER_ID_COOKIE_KEY, model.getId());
         return CommonRestResponse.ok(model.toVO());
+    }
+
+    @PostMapping("/logout")
+    @ApiOperation(value = "用户退出登录", httpMethod = "POST")
+    public CommonRestResponse logout(HttpServletResponse response) {
+        //清除Cookie中的userId
+        CookieUtils.removeCookie(response, USER_ID_COOKIE_KEY);
+        return CommonRestResponse.ok();
     }
 }
