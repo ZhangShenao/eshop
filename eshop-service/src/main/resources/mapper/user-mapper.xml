@@ -30,4 +30,11 @@
         where username = #{username}
     </select>
 
+    <select id="queryByUsernameAndPassword" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumn"/>
+        from users
+        where username = #{username} and password = #{password}
+    </select>
+
 </mapper>

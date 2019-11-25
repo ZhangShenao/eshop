@@ -13,4 +13,6 @@ import william.eshop.model.User;
  */
 public interface UserMapper extends Mapper<User>, MySqlMapper<User> {
     User queryByUsername(@Param("username") String username);
+
+    User queryByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 }

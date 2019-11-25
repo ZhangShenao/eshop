@@ -36,7 +36,7 @@ public class UserParam {
     @ApiModelProperty(value = "密码", name = "password", required = true)
     private String password;
 
-    @ApiModelProperty(value = "确认密码", name = "confirmPassword", required = true)
+    @ApiModelProperty(value = "确认密码", name = "confirmPassword")
     private String confirmPassword;
 
     public ResultCode validate() {

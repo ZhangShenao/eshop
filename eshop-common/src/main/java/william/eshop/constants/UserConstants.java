@@ -17,4 +17,6 @@ public interface UserConstants {
 
     //密码最小长度
     int PASSWORD_MIN_LENGTH = 6;
+
+    String USER_ID_COOKIE_KEY = "uid";
 }

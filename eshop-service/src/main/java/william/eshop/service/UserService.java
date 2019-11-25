@@ -25,4 +25,9 @@ public interface UserService {
      * 用户注册
      */
     User register(UserParam param);
+
+    /**
+     * 用户登录
+     */
+    Optional<User> login(String username, String password);
 }

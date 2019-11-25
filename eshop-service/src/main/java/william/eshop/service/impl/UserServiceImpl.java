@@ -9,6 +9,7 @@ import william.eshop.mapper.UserMapper;
 import william.eshop.model.User;
 import william.eshop.param.UserParam;
 import william.eshop.service.UserService;
+import william.eshop.utils.MD5Utils;
 
 /**
  * @Author zhangshenao
@@ -35,5 +36,11 @@ public class UserServiceImpl implements UserService {
         User user = param.toDefaultModel();
         userMapper.insert(user);
         return user;
+    }
+
+    @Override
+    public Optional<User> login(String username, String password) {
+        String encodedPassword = MD5Utils.encode(password);
+        return Optional.ofNullable(userMapper.queryByUsernameAndPassword(username, encodedPassword));
     }
 }

@@ -6,7 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.beans.BeanUtils;
+
 import lombok.Data;
+import william.eshop.vo.UserVO;
 
 /**
  * @Author zhangshenao
@@ -42,4 +45,10 @@ public class User {
 
     @Column(name = "updated_time")
     private Date updatedTime;
+
+    public UserVO toVO() {
+        UserVO vo = new UserVO();
+        BeanUtils.copyProperties(this, vo);
+        return vo;
+    }
 }
