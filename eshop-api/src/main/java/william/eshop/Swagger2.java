@@ -19,7 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @Description Swagger2配置
  */
 @Configuration
-@EnableSwagger2 //开启Swagger2功能 文档页地址:http://localhost:8080/swagger-ui.html
+@EnableSwagger2 //开启Swagger2功能 文档页地址:http://localhost:8888/swagger-ui.html
 public class Swagger2 {
     @Bean
     public Docket createApi() {

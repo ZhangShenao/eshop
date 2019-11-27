@@ -3,7 +3,7 @@ package william.eshop.service;
 import java.util.List;
 
 import william.eshop.constants.CarouselShowStatus;
-import william.eshop.model.Carousel;
+import william.eshop.vo.CarouselVO;
 
 /**
  * @Author zhangshenao
@@ -14,5 +14,5 @@ public interface CarouselService {
     /**
      * 根据展示状态查询轮播图列表
      */
-    List<Carousel> listByShowStatus(CarouselShowStatus showStatus);
+    List<CarouselVO> listByShowStatus(CarouselShowStatus showStatus);
 }

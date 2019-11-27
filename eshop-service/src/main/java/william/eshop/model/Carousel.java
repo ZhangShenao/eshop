@@ -2,6 +2,7 @@ package william.eshop.model;
 
 import java.util.Date;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.beans.BeanUtils;
@@ -17,6 +18,7 @@ import william.eshop.vo.CarouselVO;
 @Data
 @Table(name = "carousel")
 public class Carousel {
+    @Id
     private String id;
     private String imageUrl;
     private String backgroundColor;

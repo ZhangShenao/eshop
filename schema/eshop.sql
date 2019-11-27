@@ -53,7 +53,7 @@ CREATE TABLE `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` varchar(32) NOT NULL COMMENT '分类名称',
   `type` int(11) NOT NULL COMMENT '分类类型',
-  `father_id` int(11) NOT NULL COMMENT '父id',
+  `father_id` int(11) NOT NULL COMMENT '父分类id',
   `logo` varchar(64) DEFAULT NULL COMMENT '图标',
   `slogan` varchar(64) DEFAULT NULL COMMENT '口号',
   `cat_image` varchar(64) DEFAULT NULL COMMENT '分类图',
