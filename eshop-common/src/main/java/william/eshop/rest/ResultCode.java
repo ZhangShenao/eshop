@@ -12,7 +12,8 @@ public enum ResultCode {
     PASSWORD_NOT_MATCH(3, "两次输入密码不一致"),
     PASSWORD_TOO_SHORT(4, "密码长度过短"),
     DUPLICATE_USERNAME(5, "用户名已存在"),
-    USER_NOT_EXISTS(6, "用户不存在"),;
+    USER_NOT_EXISTS(6, "用户不存在"),
+    ITEM_NOT_EXISTS(7, "商品不存在"),;;
 
     private int code;
     private String msg;

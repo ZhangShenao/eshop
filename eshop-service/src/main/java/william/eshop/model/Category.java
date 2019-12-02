@@ -14,7 +14,7 @@ import william.eshop.vo.CategoryVO;
  * @Description 商品类别实体类
  */
 @Data
-@Table(name = "category")
+@Table(name = "items")
 public class Category {
     @Id
     private long id;
