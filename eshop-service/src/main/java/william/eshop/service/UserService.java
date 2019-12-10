@@ -30,4 +30,9 @@ public interface UserService {
      * 用户登录
      */
     Optional<User> login(String username, String password);
+
+    /**
+     * 根据id查询用户
+     */
+    Optional<User> queryById(String id);
 }

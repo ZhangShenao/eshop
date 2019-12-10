@@ -14,7 +14,10 @@ public enum ResultCode {
     DUPLICATE_USERNAME(5, "用户名已存在"),
     USER_NOT_EXISTS(6, "用户不存在"),
     ITEM_NOT_EXISTS(7, "商品不存在"),
-    USER_NOT_LOGIN(8, "用户不存在"),;
+    USER_NOT_LOGIN(8, "用户不存在"),
+    PAY_METHOD_NOT_SUPPORTED(9, "不支持的支付方式"),
+    CREATE_ORDER_FAIL(10, "创建订单失败"),
+    NOT_LOGIN(11, "用户未登录"),;
 
     private int code;
     private String msg;

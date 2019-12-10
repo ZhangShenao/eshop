@@ -43,4 +43,9 @@ public class UserServiceImpl implements UserService {
         String encodedPassword = MD5Utils.encode(password);
         return Optional.ofNullable(userMapper.queryByUsernameAndPassword(username, encodedPassword));
     }
+
+    @Override
+    public Optional<User> queryById(String id) {
+        return Optional.ofNullable(userMapper.selectByPrimaryKey(id));
+    }
 }
