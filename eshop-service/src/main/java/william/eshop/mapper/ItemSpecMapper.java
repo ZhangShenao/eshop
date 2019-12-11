@@ -14,7 +14,7 @@ import william.eshop.model.ItemSpec;
  * @Description 商品规格Mapper
  */
 public interface ItemSpecMapper extends Mapper<ItemSpec>, MySqlMapper<ItemSpec> {
-    List<ItemSpec> listInIds(@Param("ids") List<String> ids);
+    List<ItemSpec> listInIds(List<String> ids);
 
     /**
      * 商品减库存

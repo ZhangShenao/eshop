@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
+import william.eshop.constants.UserConstants;
 
 /**
  * @Author zhangshenao
@@ -39,6 +40,8 @@ public class OrderItem {
         model.id = UUID.randomUUID().toString();
         model.orderId = orderId;
         model.itemId = itemSpec.getItemId();
+        model.itemImg = UserConstants.DEFAULT_USER_FACE;
+        model.itemName = itemSpec.getName();
         model.itemSpecId = itemSpec.getId();
         model.itemSpecName = itemSpec.getName();
         model.price = itemSpec.getPriceNormal();

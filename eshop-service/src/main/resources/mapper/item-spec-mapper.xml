@@ -25,7 +25,7 @@
         from items_spec
         WHERE id in
         <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
-            #{ids}
+            #{id}
         </foreach>
     </select>
 

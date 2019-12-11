@@ -54,42 +54,45 @@ public class OrderServiceImpl implements OrderService {
     private ItemSpecMapper itemSpecMapper;
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)  //增加事务
     public Optional<String> create(CommitOrderParam param) {
+        //1. 参数校验
         if (param.isIllegal()) {
             return Optional.empty();
         }
+
+        //2. 下单用户校验
         Optional<User> user = userService.queryById(param.getUserId());
         if (!user.isPresent()) {
             log.error("下单用户不存在! userId: {}", param.getUserId());
             return Optional.empty();
         }
-        //1. 创建Order
+
+        //3. 创建Order
         Order order = Order.newInstance(param);
 
-        //2. 创建OrderItem
-        Map<String, ItemSpecParam> specs =
-                param.getItemSpecs().stream().collect(toMap(ItemSpecParam::getItemSpecId, p -> p));
+        //4. 创建OrderItem
+        Map<String, ItemSpecParam> specs = param.getItemSpecs().stream()
+                .collect(toMap(ItemSpecParam::getItemSpecId, p -> p));
         List<ItemSpec> itemSpecs = itemSpecMapper.listInIds(new ArrayList<>(specs.keySet()));
         if (CollectionUtils.isEmpty(itemSpecs)) {
             return Optional.empty();
         }
-        List<OrderItem> orderItems =
-                itemSpecs.stream()
-                        .map(s -> OrderItem.newInstance(order.getId(), s, specs.get(s.getId()).getCount()))
-                        .collect(toList());
+        List<OrderItem> orderItems = itemSpecs.stream()
+                .map(s -> OrderItem.newInstance(order.getId(), s, specs.get(s.getId()).getCount()))
+                .collect(toList());
 
-        //3. 创建OrderStatus
+        //5. 创建OrderStatus
         OrderStatus orderStatus = OrderStatus.newInstance(order.getId());
 
-        //4. 更新订单金额
-        updateOrderPrice(order, orderItems);
+        //6. 计算订单金额
+        caclOrderPrice(order, itemSpecs);
 
         orderMapper.insert(order);
-        orderItemMapper.insertList(orderItems);
+        orderItems.forEach(i -> orderItemMapper.insert(i));
         orderStatusMapper.insert(orderStatus);
 
-        //5. 扣减商品库存,如果库存不足,则抛出异常,事务回滚,避免出现超卖的情况
+        //7. 扣减商品库存,如果库存不足,则抛出异常,事务回滚,避免出现超卖的情况
         for (ItemSpecParam p : specs.values()) {
             int row = itemSpecMapper.reduceStock(p.getItemSpecId(), p.getCount());
             if (row <= 0) {
@@ -99,12 +102,20 @@ public class OrderServiceImpl implements OrderService {
         return Optional.of(order.getId());
     }
 
-    private void updateOrderPrice(Order order, List<OrderItem> orderItems) {
-        if (CollectionUtils.isEmpty(orderItems)) {
+    /**
+     * 计算订单金额
+     */
+    private void caclOrderPrice(Order order, List<ItemSpec> itemSpecs) {
+        if (CollectionUtils.isEmpty(itemSpecs)) {
             return;
         }
-        long realPayAmount = orderItems.stream().map(OrderItem::getPrice).reduce(Long::sum).orElse(0L);
+        long totalAmount = 0L;
+        long realPayAmount = 0L;
+        for (ItemSpec s : itemSpecs) {
+            totalAmount += s.getPriceNormal();
+            realPayAmount += s.getPriceDiscount();
+        }
+        order.setTotalAmount(totalAmount);
         order.setRealPayAmount(realPayAmount);
     }
-
 }

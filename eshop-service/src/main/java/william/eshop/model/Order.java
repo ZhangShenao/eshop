@@ -1,5 +1,7 @@
 package william.eshop.model;
 
+import static william.eshop.constants.CommonFlag.NO;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -9,7 +11,6 @@ import javax.persistence.Table;
 import org.springframework.beans.BeanUtils;
 
 import lombok.Data;
-import william.eshop.constants.CommonFlag;
 import william.eshop.param.CommitOrderParam;
 
 /**
@@ -23,7 +24,7 @@ public class Order {
     @Id
     private String id;  //订单主键,同时也是订单编号
 
-    private String userId;  //用户id
+    private String userId;  //下单用户id
 
     private String receiverName;    //收货人姓名快照
 
@@ -55,10 +56,11 @@ public class Order {
         Order order = new Order();
         BeanUtils.copyProperties(param, order);
         order.id = UUID.randomUUID().toString();
-        order.isComment = CommonFlag.NO.getValue();
-        order.isDelete = CommonFlag.NO.getValue();
+        order.isComment = NO.getValue();
+        order.isDelete = NO.getValue();
         order.createdTime = new Date();
         order.updatedTime = new Date();
+        order.postAmount = 0L;      //所有商品均包邮,邮费为0
         return order;
     }
 }

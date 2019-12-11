@@ -32,9 +32,6 @@ public class CommitOrderParam {
     @ApiModelProperty(value = "商品规格列表", name = "itemSpecIds", required = true)
     private List<ItemSpecParam> itemSpecs;
 
-    @ApiModelProperty(value = "收货地址", name = "address", required = true)
-    private String address;
-
     @ApiModelProperty(value = "支付方式", name = "payMethod", required = true)
     private int payMethod;
 
@@ -42,12 +39,13 @@ public class CommitOrderParam {
     private String leftMsg;
 
     public boolean isIllegal() {
-        if (StringUtils.isEmpty(userId)) {
+        if (StringUtils.isEmpty(userId) || StringUtils.isEmpty(receiverName) || StringUtils.isEmpty(receiverMobile)
+                || StringUtils.isEmpty(receiverAddress)) {
             return true;
         }
         if (CollectionUtils.isEmpty(itemSpecs)) {
             return true;
         }
-        return StringUtils.isEmpty(address);
+        return itemSpecs.stream().anyMatch(i -> i.getCount() <= 0);
     }
 }

@@ -1,5 +1,7 @@
 package william.eshop.model;
 
+import static william.eshop.constants.OrderStatus.WAIT_PAY;
+
 import java.util.Date;
 
 import javax.persistence.Id;
@@ -35,6 +37,8 @@ public class OrderStatus {
     public static OrderStatus newInstance(String orderId) {
         OrderStatus model = new OrderStatus();
         model.orderId = orderId;
+        model.orderStatus = WAIT_PAY.getValue();
+        model.createdTime = new Date();
         return model;
     }
 }
