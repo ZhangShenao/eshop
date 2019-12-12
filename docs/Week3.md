@@ -18,3 +18,11 @@
    2. Redis分布式锁
 4. 乐观锁
    1. 基于数据库状态
+
+### 三. 微信支付
+
+https://pay.weixin.qq.com/wiki/doc/api/index.html
+
+1. 扫码支付
+   1. 时序图：https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=6_5
+   2. 

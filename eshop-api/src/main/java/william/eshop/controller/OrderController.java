@@ -1,5 +1,6 @@
 package william.eshop.controller;
 
+import static william.eshop.constants.OrderStatus.WAIT_DELIVER;
 import static william.eshop.rest.ResultCode.CREATE_ORDER_FAIL;
 import static william.eshop.rest.ResultCode.INVALID_PARAM;
 import static william.eshop.rest.ResultCode.NOT_LOGIN;
@@ -10,6 +11,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import william.eshop.constants.PayMethod;
 import william.eshop.param.CommitOrderParam;
+import william.eshop.param.WechatPaidNotifyParam;
 import william.eshop.rest.CommonRestResponse;
 import william.eshop.service.service.OrderService;
 import william.eshop.service.service.PassportService;
@@ -65,5 +68,16 @@ public class OrderController {
 
         //4.TODO 从用户购物车中移除已下单的商品
         return CommonRestResponse.ok(orderId.get());
+    }
+
+    @PostMapping("/wechatPaidNotify")
+    @ApiOperation(value = "接收微信支付成功回调", httpMethod = "POST")
+    public int wehatPaidNotify(@RequestBody WechatPaidNotifyParam param) {
+        if (param.isIllegal()) {
+            return HttpStatus.OK.value();
+        }
+        //更新订单状态为已支付
+        orderService.updateOrderStatus(param.getOrderId(), WAIT_DELIVER);
+        return HttpStatus.OK.value();
     }
 }

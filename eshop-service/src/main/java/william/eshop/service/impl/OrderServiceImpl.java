@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -86,7 +87,7 @@ public class OrderServiceImpl implements OrderService {
         OrderStatus orderStatus = OrderStatus.newInstance(order.getId());
 
         //6. 计算订单金额
-        caclOrderPrice(order, itemSpecs);
+        calcOrderPrice(order, itemSpecs);
 
         orderMapper.insert(order);
         orderItems.forEach(i -> orderItemMapper.insert(i));
@@ -102,10 +103,30 @@ public class OrderServiceImpl implements OrderService {
         return Optional.of(order.getId());
     }
 
+    @Override
+    public boolean updateOrderStatus(String orderId, william.eshop.constants.OrderStatus orderStatus) {
+        OrderStatus model = orderStatusMapper.selectByPrimaryKey(orderId);
+        if (model == null) {
+            log.error("Order Status Empty! orderId: {}", orderId);
+            return false;
+        }
+
+        //订单状态校验
+        if (model.getOrderStatus() >= orderStatus.getValue()) {
+            log.error("Order Status Error! orderId: {}", orderId);
+            return false;
+        }
+
+        model.setOrderStatus(orderStatus.getValue());
+        model.setPayTime(new Date());
+        orderStatusMapper.updateByPrimaryKey(model);
+        return true;
+    }
+
     /**
      * 计算订单金额
      */
-    private void caclOrderPrice(Order order, List<ItemSpec> itemSpecs) {
+    private void calcOrderPrice(Order order, List<ItemSpec> itemSpecs) {
         if (CollectionUtils.isEmpty(itemSpecs)) {
             return;
         }
