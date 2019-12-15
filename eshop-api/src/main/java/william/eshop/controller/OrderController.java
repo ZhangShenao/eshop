@@ -4,6 +4,7 @@ import static william.eshop.constants.OrderStatus.WAIT_DELIVER;
 import static william.eshop.rest.ResultCode.CREATE_ORDER_FAIL;
 import static william.eshop.rest.ResultCode.INVALID_PARAM;
 import static william.eshop.rest.ResultCode.NOT_LOGIN;
+import static william.eshop.rest.ResultCode.ORDER_NOT_EXISTS;
 import static william.eshop.rest.ResultCode.PAY_METHOD_NOT_SUPPORTED;
 
 import java.util.Optional;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import william.eshop.constants.PayMethod;
+import william.eshop.model.OrderStatus;
 import william.eshop.param.CommitOrderParam;
 import william.eshop.param.WechatPaidNotifyParam;
 import william.eshop.rest.CommonRestResponse;
@@ -79,5 +83,16 @@ public class OrderController {
         //更新订单状态为已支付
         orderService.updateOrderStatus(param.getOrderId(), WAIT_DELIVER);
         return HttpStatus.OK.value();
+    }
+
+    @GetMapping("/status/{orderId}")
+    @ApiOperation(value = "查询订单状态", httpMethod = "POST")
+    public CommonRestResponse orderStatus(@PathVariable String orderId) {
+        //用户支付成功后,前端轮询订单支付状态,需要调此接口
+        Optional<OrderStatus> orderStatus = orderService.queryOrderStatus(orderId);
+        if (!orderStatus.isPresent()) {
+            return CommonRestResponse.error(ORDER_NOT_EXISTS);
+        }
+        return CommonRestResponse.ok(orderStatus.get().getOrderStatus());
     }
 }

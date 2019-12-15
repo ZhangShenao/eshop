@@ -17,7 +17,8 @@ public enum ResultCode {
     USER_NOT_LOGIN(8, "用户不存在"),
     PAY_METHOD_NOT_SUPPORTED(9, "不支持的支付方式"),
     CREATE_ORDER_FAIL(10, "创建订单失败"),
-    NOT_LOGIN(11, "用户未登录"),;
+    NOT_LOGIN(11, "用户未登录"),
+    ORDER_NOT_EXISTS(12, "订单不存在"),;
 
     private int code;
     private String msg;

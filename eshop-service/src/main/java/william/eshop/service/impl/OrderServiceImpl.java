@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -121,6 +122,28 @@ public class OrderServiceImpl implements OrderService {
         model.setPayTime(new Date());
         orderStatusMapper.updateByPrimaryKey(model);
         return true;
+    }
+
+    @Override
+    public Optional<OrderStatus> queryOrderStatus(String orderId) {
+        return Optional.ofNullable(orderStatusMapper.selectByPrimaryKey(orderId));
+    }
+
+    @Override
+    public List<OrderStatus> allOrderStatus() {
+        return Optional.ofNullable(orderStatusMapper.selectAll())
+                .orElse(Collections.emptyList());
+    }
+
+    @Override
+    public boolean closeOrder(String orderId) {
+        OrderStatus orderStatus = orderStatusMapper.selectByPrimaryKey(orderId);
+        if (orderStatus == null) {
+            return false;
+        }
+        orderStatus.setOrderStatus(william.eshop.constants.OrderStatus.CLOSED.getValue());
+        orderStatus.setCloseTime(new Date());
+        return (orderStatusMapper.updateByPrimaryKey(orderStatus) > 0);
     }
 
     /**

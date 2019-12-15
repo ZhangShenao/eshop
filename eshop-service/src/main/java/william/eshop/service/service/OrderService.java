@@ -1,5 +1,6 @@
 package william.eshop.service.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import william.eshop.constants.OrderStatus;
@@ -16,5 +17,23 @@ public interface OrderService {
      */
     Optional<String> create(CommitOrderParam param);
 
+    /**
+     * 更新订单状态
+     */
     boolean updateOrderStatus(String orderId, OrderStatus orderStatus);
+
+    /**
+     * 查询订单状态
+     */
+    Optional<william.eshop.model.OrderStatus> queryOrderStatus(String orderId);
+
+    /**
+     * 查询所有订单状态
+     */
+    List<william.eshop.model.OrderStatus> allOrderStatus();
+
+    /**
+     * 关闭订单
+     */
+    boolean closeOrder(String orderId);
 }
