@@ -1,9 +1,11 @@
 package william.eshop.service.impl;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import william.eshop.mapper.UserMapper;
 import william.eshop.model.User;
@@ -47,5 +49,29 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> queryById(String id) {
         return Optional.ofNullable(userMapper.selectByPrimaryKey(id));
+    }
+
+    @Override
+    public boolean modifyUserInfo(String userId, UserParam param) {
+        User model = userMapper.selectByPrimaryKey(userId);
+        if (model == null) {
+            return false;
+        }
+
+        if (StringUtils.hasText(param.getNickname())) {
+            model.setNickname(param.getNickname());
+        }
+        if (StringUtils.hasText(param.getRealname())) {
+            model.setRealname(param.getRealname());
+        }
+        if (StringUtils.hasText(param.getMobile())) {
+            model.setMobile(param.getMobile());
+        }
+        if (StringUtils.hasText(param.getEmail())) {
+            model.setEmail(param.getEmail());
+        }
+        model.setUpdatedTime(new Date());
+        userMapper.updateByPrimaryKey(model);
+        return true;
     }
 }

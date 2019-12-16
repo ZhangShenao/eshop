@@ -35,4 +35,9 @@ public interface UserService {
      * 根据id查询用户
      */
     Optional<User> queryById(String id);
+
+    /**
+     * 修改用户信息
+     */
+    boolean modifyUserInfo(String userId, UserParam param);
 }

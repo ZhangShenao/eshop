@@ -3,7 +3,6 @@ package william.eshop.task;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +22,7 @@ public class CloseTimeoutOrderTask {
     @Autowired
     private OrderService orderService;
 
-    @Scheduled(fixedDelay = 5000L)
+//    @Scheduled(fixedDelay = 5000L)
     public void closeTimeoutOrders() {
         log.info("Close Timeout Orders ! Current Time: {}", DateUtils.getCurrentDateString("yyyy-MM-dd hh:mm:ss"));
         orderService.allOrderStatus()
