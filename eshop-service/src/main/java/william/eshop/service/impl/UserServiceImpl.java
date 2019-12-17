@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import lombok.extern.slf4j.Slf4j;
 import william.eshop.mapper.UserMapper;
 import william.eshop.model.User;
 import william.eshop.param.UserParam;
@@ -19,6 +20,7 @@ import william.eshop.utils.MD5Utils;
  * @Description 用户服务
  */
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
@@ -71,7 +73,16 @@ public class UserServiceImpl implements UserService {
             model.setEmail(param.getEmail());
         }
         model.setUpdatedTime(new Date());
-        userMapper.updateByPrimaryKey(model);
-        return true;
+        return (userMapper.updateByPrimaryKey(model) > 0);
+    }
+
+    @Override
+    public boolean updateHeadUrl(String userId, String url) {
+        User model = userMapper.selectByPrimaryKey(userId);
+        if (model == null) {
+            return false;
+        }
+        model.setFace(url);
+        return (userMapper.updateByPrimaryKey(model) > 0);
     }
 }

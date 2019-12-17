@@ -40,4 +40,9 @@ public interface UserService {
      * 修改用户信息
      */
     boolean modifyUserInfo(String userId, UserParam param);
+
+    /**
+     * 修改用户头像url
+     */
+    boolean updateHeadUrl(String userId, String url);
 }

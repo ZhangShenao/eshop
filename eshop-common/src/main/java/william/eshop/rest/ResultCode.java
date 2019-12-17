@@ -18,7 +18,11 @@ public enum ResultCode {
     PAY_METHOD_NOT_SUPPORTED(9, "不支持的支付方式"),
     CREATE_ORDER_FAIL(10, "创建订单失败"),
     NOT_LOGIN(11, "用户未登录"),
-    ORDER_NOT_EXISTS(12, "订单不存在"),;
+    ORDER_NOT_EXISTS(12, "订单不存在"),
+    ILLEGAL_FILE_STATUS(13, "文件状态异常"),
+    UNSUPPORTED_FILE_TYPE(14, "文件类型不支持"),
+    UPLOAD_FILE_FAIL(15, "文件上传失败,请稍后重试"),
+    FILE_TOO_LARGE(16, "文件大小超出上限,请压缩后重试"),;
 
     private int code;
     private String msg;
