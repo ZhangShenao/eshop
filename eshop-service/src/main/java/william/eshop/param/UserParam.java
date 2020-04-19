@@ -10,6 +10,7 @@ import static william.eshop.rest.ResultCode.PASSWORD_TOO_SHORT;
 import static william.eshop.rest.ResultCode.SUCCESS;
 
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.validation.constraints.Email;
@@ -48,27 +49,27 @@ public class UserParam {
 
     @NotBlank(message = "用户昵称不能为空")
     @Length(max = 12, message = "用户昵称不能超过12位")
-    @ApiModelProperty(value = "用户昵称", name = "nickname", example = "杰森", required = false)
+    @ApiModelProperty(value = "用户昵称", name = "nickname", example = "杰森")
     private String nickname;
 
     @Length(max = 12, message = "用户真实姓名不能超过12位")
-    @ApiModelProperty(value = "真实姓名", name = "realname", example = "杰森", required = false)
-    private String realname;
+    @ApiModelProperty(value = "真实姓名", name = "realName", example = "杰森")
+    private String realName;
 
     @Pattern(regexp = "^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\\d{8})$", message = "手机号格式不正确")
-    @ApiModelProperty(value = "手机号", name = "mobile", example = "13999999999", required = false)
+    @ApiModelProperty(value = "手机号", name = "mobile", example = "13999999999")
     private String mobile;
 
     @Email
-    @ApiModelProperty(value = "邮箱地址", name = "email", example = "imooc@imooc.com", required = false)
+    @ApiModelProperty(value = "邮箱地址", name = "email", example = "imooc@imooc.com")
     private String email;
 
     @Min(value = 0, message = "性别选择不正确")
     @Max(value = 2, message = "性别选择不正确")
-    @ApiModelProperty(value = "性别", name = "sex", example = "0:女 1:男 2:保密", required = false)
+    @ApiModelProperty(value = "性别", name = "sex", example = "0:女 1:男 2:保密")
     private int sex;
 
-    @ApiModelProperty(value = "生日", name = "birthday", example = "1900-01-01", required = false)
+    @ApiModelProperty(value = "生日", name = "birthday", example = "1900-01-01")
     private Date birthday;
 
     public ResultCode validate() {
@@ -106,6 +107,9 @@ public class UserParam {
 
         //默认性别
         model.setSex(DEFAULT_GENDER.getValue());
+
+        //真实姓名
+        Optional.ofNullable(realName).ifPresent(model::setRealName);
 
         model.setCreatedTime(new Date());
         model.setUpdatedTime(new Date());

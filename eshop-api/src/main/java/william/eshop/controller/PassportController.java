@@ -35,7 +35,8 @@ import william.eshop.utils.CookieUtils;
  */
 @RestController
 @RequestMapping("/passport")
-@Api(value = "用户注册登录相关接口")
+@Api(value = "用户注册登录相关接口", tags = "用户注册登录相关接口")
+//@ApiIgnore 生成Swagger文档时忽略此API
 public class PassportController {
     @Autowired
     private UserService userService;

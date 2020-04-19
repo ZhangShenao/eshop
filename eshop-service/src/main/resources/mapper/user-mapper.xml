@@ -7,7 +7,7 @@
         <result column="username" property="username"/>
         <result column="password" property="password"/>
         <result column="nickname" property="nickname"/>
-        <result column="realname" property="realname"/>
+        <result column="real_name" property="realName"/>
         <result column="face" property="face"/>
         <result column="mobile" property="mobile"/>
         <result column="email" property="email"/>
@@ -19,7 +19,7 @@
 
 
     <sql id="BaseColumn">
-        id, username, nickname, realname, face, mobile, email, sex, birthday, created_time, updated_time
+        id, username, nickname, real_name, face, mobile, email, sex, birthday, created_time, updated_time
     </sql>
 
     <select id="queryByUsername" resultMap="BaseResultMap">

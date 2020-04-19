@@ -19,7 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @Description Swagger2配置
  */
 @Configuration
-@EnableSwagger2 //开启Swagger2功能 文档页地址:http://localhost:8888/eshop/swagger-ui.html
+@EnableSwagger2 //开启Swagger2功能 文档页地址:http://localhost:9999/eshop/swagger-ui.html
 public class Swagger2 {
     @Bean
     public Docket createApi() {
@@ -41,6 +41,6 @@ public class Swagger2 {
     }
 
     private Contact contact() {
-        return new Contact("zhangshenao", "https://github.com/ZhangShenao", "zhangshenao@qq.com");
+        return new Contact("zhangshenao", "https://github.com/ZhangShenao", "15201440436@163.com");
     }
 }

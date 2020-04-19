@@ -63,8 +63,8 @@ public class UserServiceImpl implements UserService {
         if (StringUtils.hasText(param.getNickname())) {
             model.setNickname(param.getNickname());
         }
-        if (StringUtils.hasText(param.getRealname())) {
-            model.setRealname(param.getRealname());
+        if (StringUtils.hasText(param.getRealName())) {
+            model.setRealName(param.getRealName());
         }
         if (StringUtils.hasText(param.getMobile())) {
             model.setMobile(param.getMobile());

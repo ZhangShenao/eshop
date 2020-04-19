@@ -28,7 +28,7 @@ public class User {
 
     private String nickname;
 
-    private String realname;
+    private String realName;
 
     private String face;
 

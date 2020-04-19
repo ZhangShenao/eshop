@@ -11,6 +11,9 @@
 
     <artifactId>eshop-common</artifactId>
 
+    <!--默认打包方式就是jar-->
+    <packaging>jar</packaging>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

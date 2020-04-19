@@ -1,9 +1,9 @@
 #Tomcat配置
 server:
-  port: 8888
+  port: 9999
   tomcat:
     uri-encoding: UTF-8
-  max-http-header-size: 80KB
+  max-http-header-size: 80KB  #限制http请求头的最大长度
   servlet:
     context-path: /eshop
 
