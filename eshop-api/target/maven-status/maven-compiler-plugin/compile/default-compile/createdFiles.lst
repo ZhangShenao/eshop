@@ -1,0 +1,14 @@
+META-INF/spring-configuration-metadata.json
+william/eshop/EShopAPIApplication.class
+william/eshop/controller/ItemController.class
+william/eshop/controller/PassportController.class
+william/eshop/controller/ShoppingCartController.class
+william/eshop/config/CorsConfig.class
+william/eshop/controller/OrderController.class
+william/eshop/handler/FileExceptionHandler.class
+william/eshop/controller/IndexController.class
+william/eshop/controller/UserCenterController.class
+william/eshop/config/StaticResourceConfig.class
+william/eshop/resource/FileUploadResource.class
+william/eshop/controller/ItemCommentController.class
+william/eshop/Swagger2.class

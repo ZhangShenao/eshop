@@ -1,0 +1,14 @@
+/Users/zhangshenao/Desktop/projects/eshop/eshop-common/src/main/java/william/eshop/constants/Gender.java
+/Users/zhangshenao/Desktop/projects/eshop/eshop-common/src/main/java/william/eshop/constants/UserConstants.java
+/Users/zhangshenao/Desktop/projects/eshop/eshop-common/src/main/java/william/eshop/exception/OrderException.java
+/Users/zhangshenao/Desktop/projects/eshop/eshop-common/src/main/java/william/eshop/constants/CommonFlag.java
+/Users/zhangshenao/Desktop/projects/eshop/eshop-common/src/main/java/william/eshop/utils/FileUtils.java
+/Users/zhangshenao/Desktop/projects/eshop/eshop-common/src/main/java/william/eshop/constants/PayMethod.java
+/Users/zhangshenao/Desktop/projects/eshop/eshop-common/src/main/java/william/eshop/utils/DateUtils.java
+/Users/zhangshenao/Desktop/projects/eshop/eshop-common/src/main/java/william/eshop/constants/OrderStatus.java
+/Users/zhangshenao/Desktop/projects/eshop/eshop-common/src/main/java/william/eshop/rest/ResultCode.java
+/Users/zhangshenao/Desktop/projects/eshop/eshop-common/src/main/java/william/eshop/utils/MD5Utils.java
+/Users/zhangshenao/Desktop/projects/eshop/eshop-common/src/main/java/william/eshop/utils/CookieUtils.java
+/Users/zhangshenao/Desktop/projects/eshop/eshop-common/src/main/java/william/eshop/constants/CategoryLevel.java
+/Users/zhangshenao/Desktop/projects/eshop/eshop-common/src/main/java/william/eshop/rest/CommonRestResponse.java
+/Users/zhangshenao/Desktop/projects/eshop/eshop-common/src/main/java/william/eshop/constants/CarouselShowStatus.java
