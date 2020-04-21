@@ -23,17 +23,17 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `carousel`;
 CREATE TABLE `carousel` (
   `id` varchar(64) NOT NULL COMMENT '主键',
-  `image_url` varchar(128) NOT NULL COMMENT '图片 图片地址',
+  `image_url` varchar(128) NOT NULL COMMENT '图片地址',
   `background_color` varchar(32) DEFAULT NULL COMMENT '背景色',
-  `item_id` varchar(64) DEFAULT NULL COMMENT '商品id 商品id',
-  `cat_id` varchar(64) DEFAULT NULL COMMENT '商品分类id 商品分类id',
-  `type` int(11) NOT NULL COMMENT '轮播图类型 轮播图类型，用于判断，可以根据商品id或者分类进行页面跳转，1：商品 2：分类',
+  `item_id` varchar(64) DEFAULT NULL COMMENT '商品id',
+  `cat_id` varchar(64) DEFAULT NULL COMMENT '商品分类id',
+  `type` int(11) NOT NULL COMMENT '轮播图类型,用于判断,可以根据商品id或者分类进行页面跳转 1=商品 2=分类',
   `sort` int(11) NOT NULL COMMENT '轮播图展示顺序',
   `is_show` int(11) NOT NULL COMMENT '是否展示',
-  `create_time` datetime NOT NULL COMMENT '创建时间 创建时间',
-  `update_time` datetime NOT NULL COMMENT '更新时间 更新',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='轮播图 ';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='轮播图';
 
 -- ----------------------------
 -- Records of carousel
@@ -52,7 +52,7 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` varchar(32) NOT NULL COMMENT '分类名称',
-  `type` int(11) NOT NULL COMMENT '分类类型',
+  `level` int(11) NOT NULL COMMENT '分类级别,根分类=1',
   `father_id` int(11) NOT NULL COMMENT '父分类id',
   `logo` varchar(64) DEFAULT NULL COMMENT '图标',
   `slogan` varchar(64) DEFAULT NULL COMMENT '口号',
@@ -1838,7 +1838,7 @@ CREATE TABLE `users` (
   `username` varchar(32) NOT NULL COMMENT '用户名',
   `password` varchar(64) NOT NULL COMMENT '密码(经MD5加密后)',
   `nickname` varchar(32) DEFAULT NULL COMMENT '昵称',
-  `realname` varchar(128) DEFAULT NULL COMMENT '真实姓名',
+  `real_name` varchar(128) DEFAULT NULL COMMENT '真实姓名',
   `face` varchar(1024) NOT NULL COMMENT '头像',
   `mobile` varchar(32) DEFAULT NULL COMMENT '手机号',
   `email` varchar(32) DEFAULT NULL COMMENT '邮箱地址 邮箱地址',

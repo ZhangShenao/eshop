@@ -14,14 +14,14 @@ import william.eshop.vo.CategoryVO;
  * @Description 商品类别实体类
  */
 @Data
-@Table(name = "items")
+@Table(name = "category")
 public class Category {
     @Id
     private long id;
 
     private String name;
 
-    private int type;
+    private int level;
 
     private long fatherId;
 

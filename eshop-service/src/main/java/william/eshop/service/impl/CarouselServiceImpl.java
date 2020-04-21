@@ -3,6 +3,7 @@ package william.eshop.service.impl;
 import static java.util.stream.Collectors.toList;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,7 @@ public class CarouselServiceImpl implements CarouselService {
         return Optional.ofNullable(carouselMapper.listByShowStatus(showStatus.getValue()))
                 .orElse(Collections.emptyList())
                 .stream()
+                .sorted(Comparator.comparingInt(Carousel::getSort)) //排序
                 .map(Carousel::toVO)
                 .collect(toList());
     }

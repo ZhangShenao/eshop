@@ -25,7 +25,7 @@ import william.eshop.vo.CategoryVO;
  * @Date 2019-11-27
  * @Description 首页展示相关API
  */
-@Api(value = "首页展示的相关接口")
+@Api(value = "首页展示的相关接口", tags = "首页展示的相关接口")
 @RestController
 @RequestMapping("/index")
 public class IndexController {
@@ -41,13 +41,13 @@ public class IndexController {
         return CommonRestResponse.ok(carouselService.listByShowStatus(SHOW));
     }
 
-    @GetMapping("/rootCategories")
+    @GetMapping("/category/root/list")
     @ApiOperation(value = "一级分类列表", httpMethod = "GET")
     public CommonRestResponse<List<CategoryVO>> rootCategories() {
         return CommonRestResponse.ok(categoryService.listByLevel(LEVEL_1));
     }
 
-    @GetMapping("/subCategories/{categoryId}")
+    @GetMapping("/category/{categoryId}/sub")
     @ApiOperation(value = "子分类列表", httpMethod = "GET")
     public CommonRestResponse<List<CategoryVO>> subCategories(
             @ApiParam(name = "categoryId", value = "父分类id", required = true) @PathVariable long categoryId) {

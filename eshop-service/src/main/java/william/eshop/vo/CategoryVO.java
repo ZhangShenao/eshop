@@ -18,8 +18,8 @@ public class CategoryVO {
     @ApiModelProperty(value = "分类名称", name = "name", required = true)
     private String name;
 
-    @ApiModelProperty(value = "分类级别", name = "type", required = true)
-    private int type;
+    @ApiModelProperty(value = "分类级别", name = "level", required = true)
+    private int level;
 
     @ApiModelProperty(value = "分类logo", name = "logo", required = true)
     private String logo;

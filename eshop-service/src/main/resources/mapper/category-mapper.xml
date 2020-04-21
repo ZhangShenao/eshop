@@ -5,7 +5,7 @@
     <resultMap id="BaseResultMap" type="william.eshop.model.Category">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
-        <result column="type" property="type"/>
+        <result column="level" property="level"/>
         <result column="father_id" property="fatherId"/>
         <result column="logo" property="logo"/>
         <result column="slogan" property="slogan"/>
@@ -14,7 +14,7 @@
     </resultMap>
 
     <sql id="BaseColumn">
-        id, name, type, father_id, logo, slogan, cat_image, bg_color
+        id, name, level, father_id, logo, slogan, cat_image, bg_color
     </sql>
 
     <select id="listByLevel" resultMap="BaseResultMap">
@@ -22,7 +22,7 @@
         <!--引用SQL片段-->
         <include refid="BaseColumn"/>
         from category
-        where type = #{level}
+        where level = #{level}
     </select>
 
     <select id="subCategories" resultMap="BaseResultMap">
