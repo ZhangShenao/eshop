@@ -17,7 +17,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import william.eshop.param.ShoppingCartParam;
 import william.eshop.rest.CommonRestResponse;
-import william.eshop.service.service.PassportService;
+import william.eshop.service.passport.PassportService;
 
 /**
  * @Author zhangshenao

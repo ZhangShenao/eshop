@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="william.eshop.mapper.OrderItemMapper">
+<mapper namespace="william.eshop.mapper.order.OrderItemMapper">
     <!--结果集映射-->
-    <resultMap id="BaseResultMap" type="william.eshop.model.OrderItem">
+    <resultMap id="BaseResultMap" type="william.eshop.model.order.OrderItem">
         <id column="id" property="id"/>
         <result column="order_id" property="orderId"/>
         <result column="item_id" property="itemId"/>

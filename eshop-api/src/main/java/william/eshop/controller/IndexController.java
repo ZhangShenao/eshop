@@ -15,10 +15,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import william.eshop.rest.CommonRestResponse;
-import william.eshop.service.CarouselService;
-import william.eshop.service.CategoryService;
-import william.eshop.vo.CarouselVO;
-import william.eshop.vo.CategoryVO;
+import william.eshop.service.carousel.CarouselService;
+import william.eshop.service.category.CategoryService;
+import william.eshop.vo.carousel.CarouselVO;
+import william.eshop.vo.carousel.CategoryVO;
 
 /**
  * @Author zhangshenao
