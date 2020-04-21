@@ -27,11 +27,11 @@ import org.springframework.web.multipart.MultipartFile;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import william.eshop.model.User;
+import william.eshop.model.user.User;
 import william.eshop.param.UserParam;
 import william.eshop.resource.FileUploadResource;
 import william.eshop.rest.CommonRestResponse;
-import william.eshop.service.UserService;
+import william.eshop.service.user.UserService;
 import william.eshop.utils.FileUtils;
 
 /**

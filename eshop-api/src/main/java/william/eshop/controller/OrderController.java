@@ -23,12 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import william.eshop.constants.PayMethod;
-import william.eshop.model.OrderStatus;
+import william.eshop.model.order.OrderStatus;
 import william.eshop.param.CommitOrderParam;
 import william.eshop.param.WechatPaidNotifyParam;
 import william.eshop.rest.CommonRestResponse;
-import william.eshop.service.service.OrderService;
-import william.eshop.service.service.PassportService;
+import william.eshop.service.order.OrderService;
+import william.eshop.service.passport.PassportService;
 
 /**
  * @Author zhangshenao

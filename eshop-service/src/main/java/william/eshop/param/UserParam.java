@@ -25,7 +25,7 @@ import org.springframework.util.StringUtils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import william.eshop.model.User;
+import william.eshop.model.user.User;
 import william.eshop.rest.ResultCode;
 import william.eshop.utils.DateUtils;
 import william.eshop.utils.MD5Utils;

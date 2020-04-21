@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="william.eshop.mapper.ItemSpecMapper">
+<mapper namespace="william.eshop.mapper.item.ItemSpecMapper">
     <!--结果集映射-->
-    <resultMap id="BaseResultMap" type="william.eshop.model.ItemSpec">
+    <resultMap id="BaseResultMap" type="william.eshop.model.item.ItemSpec">
         <id column="id" property="id"/>
         <result column="item_id" property="itemId"/>
         <result column="name" property="name"/>
@@ -15,8 +15,16 @@
     </resultMap>
 
     <sql id="BaseColumn">
-        id, item_id, `name`, stock, discounts, price_discount, price_normal, created_time, updated_time
+        `id`, `item_id`, `name`, `stock`, `discounts`, `price_discount`, `price_normal`, `created_time`, `updated_time`
     </sql>
+
+    <select id="listByItemId" resultMap="BaseResultMap">
+        select
+        <!--引用SQL片段-->
+        <include refid="BaseColumn"/>
+        from items_spec
+        WHERE item_id = #{itemId}
+    </select>
 
     <select id="listInIds" resultMap="BaseResultMap">
         select

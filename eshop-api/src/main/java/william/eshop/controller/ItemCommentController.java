@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import william.eshop.model.ItemComment;
+import william.eshop.model.item.ItemComment;
 import william.eshop.rest.CommonRestResponse;
-import william.eshop.service.ItemCommentService;
-import william.eshop.vo.ItemCommentVO;
+import william.eshop.service.item.ItemCommentService;
+import william.eshop.vo.item.ItemCommentVO;
 
 /**
  * @Author zhangshenao

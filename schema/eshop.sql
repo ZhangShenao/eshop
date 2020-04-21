@@ -247,12 +247,12 @@ COMMIT;
 DROP TABLE IF EXISTS `items`;
 CREATE TABLE `items` (
   `id` varchar(64) NOT NULL COMMENT '商品主键id',
-  `item_name` varchar(32) NOT NULL COMMENT '商品名称 商品名称',
-  `cat_id` int(11) NOT NULL COMMENT '分类外键id 分类id',
-  `root_cat_id` int(11) NOT NULL COMMENT '一级分类外键id',
-  `sell_counts` int(11) NOT NULL COMMENT '累计销售 累计销售',
-  `on_off_status` int(11) NOT NULL COMMENT '上下架状态 上下架状态,1:上架 2:下架',
-  `content` text NOT NULL COMMENT '商品内容 商品内容',
+  `item_name` varchar(32) NOT NULL COMMENT '商品名称',
+  `cat_id` int(11) NOT NULL COMMENT '直属分类id',
+  `root_cat_id` int(11) NOT NULL COMMENT '一级分类id',
+  `sell_counts` int(11) NOT NULL COMMENT '累计销量',
+  `on_off_status` int(11) NOT NULL COMMENT '上下架状态 1=上架 2=下架',
+  `content` text NOT NULL COMMENT '商品内容',
   `created_time` datetime NOT NULL COMMENT '创建时间',
   `updated_time` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -492,11 +492,11 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `items_img`;
 CREATE TABLE `items_img` (
-  `id` varchar(64) NOT NULL COMMENT '图片主键',
-  `item_id` varchar(64) NOT NULL COMMENT '商品外键id 商品外键id',
-  `url` varchar(128) NOT NULL COMMENT '图片地址 图片地址',
-  `sort` int(11) NOT NULL COMMENT '顺序 图片顺序，从小到大',
-  `is_main` int(11) NOT NULL COMMENT '是否主图 是否主图，1：是，0：否',
+  `id` varchar(64) NOT NULL COMMENT '主键',
+  `item_id` varchar(64) NOT NULL COMMENT '商品id',
+  `url` varchar(128) NOT NULL COMMENT '图片地址',
+  `sort` int(11) NOT NULL COMMENT '图片顺序,从小到大',
+  `is_main` int(11) NOT NULL COMMENT '是否主图',
   `created_time` datetime NOT NULL COMMENT '创建时间',
   `updated_time` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -863,21 +863,21 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `items_param`;
 CREATE TABLE `items_param` (
-  `id` varchar(64) NOT NULL COMMENT '商品参数id',
-  `item_id` varchar(32) NOT NULL COMMENT '商品外键id',
-  `produc_place` varchar(32) NOT NULL COMMENT '产地 产地，例：中国江苏',
-  `foot_period` varchar(32) NOT NULL COMMENT '保质期 保质期，例：180天',
-  `brand` varchar(32) NOT NULL COMMENT '品牌名 品牌名，例：三只大灰狼',
-  `factory_name` varchar(32) NOT NULL COMMENT '生产厂名 生产厂名，例：大灰狼工厂',
-  `factory_address` varchar(32) NOT NULL COMMENT '生产厂址 生产厂址，例：大灰狼生产基地',
-  `packaging_method` varchar(32) NOT NULL COMMENT '包装方式 包装方式，例：袋装',
-  `weight` varchar(32) NOT NULL COMMENT '规格重量 规格重量，例：35g',
-  `storage_method` varchar(32) NOT NULL COMMENT '存储方法 存储方法，例：常温5~25°',
-  `eat_method` varchar(32) NOT NULL COMMENT '食用方式 食用方式，例：开袋即食',
+  `id` varchar(64) NOT NULL COMMENT '主键',
+  `item_id` varchar(32) NOT NULL COMMENT '商品id',
+  `produce_place` varchar(32) NOT NULL COMMENT '产地，例：中国江苏',
+  `foot_period` varchar(32) NOT NULL COMMENT '保质期，例：180天',
+  `brand` varchar(32) NOT NULL COMMENT '品牌名，例：三只大灰狼',
+  `factory_name` varchar(32) NOT NULL COMMENT '生产厂名，例：大灰狼工厂',
+  `factory_address` varchar(32) NOT NULL COMMENT '生产厂址，例：大灰狼生产基地',
+  `packaging_method` varchar(32) NOT NULL COMMENT '包装方式，例：袋装',
+  `weight` varchar(32) NOT NULL COMMENT '规格重量，例：35g',
+  `storage_method` varchar(32) NOT NULL COMMENT '存储方法，例：常温5~25°',
+  `eat_method` varchar(32) NOT NULL COMMENT '食用方式，例：开袋即食',
   `created_time` datetime NOT NULL COMMENT '创建时间',
   `updated_time` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='商品参数 ';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='商品参数';
 
 -- ----------------------------
 -- Records of items_param
@@ -1064,8 +1064,8 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `items_spec`;
 CREATE TABLE `items_spec` (
-  `id` varchar(64) NOT NULL COMMENT '商品规格id',
-  `item_id` varchar(64) NOT NULL COMMENT '商品外键id',
+  `id` varchar(64) NOT NULL COMMENT '主键id',
+  `item_id` varchar(64) NOT NULL COMMENT '商品id',
   `name` varchar(32) NOT NULL COMMENT '规格名称',
   `stock` int(11) NOT NULL COMMENT '库存',
   `discounts` decimal(4,2) NOT NULL COMMENT '折扣力度',

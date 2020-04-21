@@ -21,11 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import william.eshop.model.User;
+import william.eshop.model.user.User;
 import william.eshop.param.UserParam;
 import william.eshop.rest.CommonRestResponse;
 import william.eshop.rest.ResultCode;
-import william.eshop.service.UserService;
+import william.eshop.service.user.UserService;
 import william.eshop.utils.CookieUtils;
 
 /**
