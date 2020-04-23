@@ -8,7 +8,7 @@
         <result column="item_id" property="itemId"/>
         <result column="item_name" property="itemName"/>
         <result column="item_spec_id" property="itemSpecId"/>
-        <result column="sepc_name" property="sepcName"/>
+        <result column="spec_name" property="specName"/>
         <result column="comment_level" property="commentLevel"/>
         <result column="content" property="content"/>
         <result column="created_time" property="createdTime"/>
@@ -16,7 +16,7 @@
     </resultMap>
 
     <sql id="BaseColumn">
-        id, user_id, item_id, item_name, item_spec_id, sepc_name, comment_level, content, created_time, updated_time
+        id, user_id, item_id, item_name, item_spec_id, spec_name, comment_level, content, created_time, updated_time
     </sql>
 
     <select id="listByItemId" resultMap="BaseResultMap">
@@ -25,6 +25,18 @@
         <include refid="BaseColumn"/>
         from items_comments
         where item_id = #{itemId}
+    </select>
+
+    <select id="countByItem" resultType="long">
+        select count(*)
+        from items_comments
+        where item_id = #{itemId}
+    </select>
+
+    <select id="countByItemAndLevel" resultType="long">
+        select count(*)
+        from items_comments
+        where item_id = #{itemId} and comment_level = #{level}
     </select>
 
 </mapper>

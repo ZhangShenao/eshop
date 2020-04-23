@@ -27,8 +27,8 @@ public class ItemCommentVO {
     @ApiModelProperty(value = "商品规格id", name = "itemSpecId", required = true)
     private String itemSpecId;
 
-    @ApiModelProperty(value = "商品规格名称", name = "sepcName", required = true)
-    private String sepcName;
+    @ApiModelProperty(value = "商品规格名称", name = "specName", required = true)
+    private String specName;
 
     @ApiModelProperty(value = "评价等级", name = "commentLevel", required = true)
     private int commentLevel;
