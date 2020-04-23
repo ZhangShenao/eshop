@@ -11,14 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import william.eshop.model.item.Item;
 import william.eshop.rest.CommonRestResponse;
 import william.eshop.service.item.ItemService;
 import william.eshop.vo.item.ItemDetailVO;
+import william.eshop.vo.item.ItemSimpleVO;
 
 /**
  * @Author zhangshenao
@@ -62,6 +65,25 @@ public class ItemController {
                 .stream()
                 .map(Item::toVO)
                 .collect(toList());
+        return CommonRestResponse.ok(items);
+    }
+
+    @GetMapping("/search")
+    @ApiOperation(value = "根据关键词搜索", httpMethod = "GET")
+    public CommonRestResponse<List<ItemSimpleVO>> search(
+            @ApiParam(name = "keyWord", value = "关键词", required = true) @RequestParam("keyWord") String keyWord,
+            @ApiParam(name = "sort", value = "排序方式 1=时间降序 2=销量降序 3=价格升序", required = true) @RequestParam("sort")
+                    int sort) {
+        List<ItemSimpleVO> items = itemService.search(keyWord, sort);
+        return CommonRestResponse.ok(items);
+    }
+
+    @GetMapping("/listByCategory/{categoryId}")
+    @ApiOperation(value = "查询分类下的所有商品", httpMethod = "GET")
+    public CommonRestResponse<List<ItemSimpleVO>> listByCategory(@PathVariable("categoryId") int categoryId,
+            @ApiParam(name = "sort", value = "排序方式 1=时间降序 2=销量降序 3=价格升序", required = true) @RequestParam("sort")
+                    int sort) {
+        List<ItemSimpleVO> items = itemService.listByCategory(categoryId, sort);
         return CommonRestResponse.ok(items);
     }
 }

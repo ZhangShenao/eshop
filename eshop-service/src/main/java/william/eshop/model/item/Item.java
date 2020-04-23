@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 
 import lombok.Data;
 import william.eshop.vo.item.ItemDetailVO;
+import william.eshop.vo.item.ItemSimpleVO;
 
 /**
  * @Author zhangshenao
@@ -40,6 +41,13 @@ public class Item {
     public ItemDetailVO toVO() {
         ItemDetailVO vo = new ItemDetailVO();
         BeanUtils.copyProperties(this, vo);
+        return vo;
+    }
+
+    public ItemSimpleVO toSimpleVO() {
+        ItemSimpleVO vo = new ItemSimpleVO();
+        BeanUtils.copyProperties(this, vo);
+        vo.setUpdateTime(updatedTime.getTime());
         return vo;
     }
 }
