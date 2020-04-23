@@ -8,6 +8,7 @@ import william.eshop.model.item.ItemImage;
 import william.eshop.model.item.ItemParam;
 import william.eshop.model.item.ItemSpec;
 import william.eshop.vo.item.ItemDetailVO;
+import william.eshop.vo.item.ItemSimpleVO;
 
 /**
  * @Author zhangshenao
@@ -44,4 +45,14 @@ public interface ItemService {
      * 商品规格列表
      */
     List<ItemSpec> spec(String itemId);
+
+    /**
+     * 关键词搜索
+     */
+    List<ItemSimpleVO> search(String keyWord, int sort);
+
+    /**
+     * 查询分类下的所有商品
+     */
+    List<ItemSimpleVO> listByCategory(int categoryId, int sort);
 }

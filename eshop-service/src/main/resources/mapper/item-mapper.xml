@@ -26,4 +26,20 @@
         where root_cat_id = #{rootCategoryId}
     </select>
 
+    <select id="searchByKeyWord" resultMap="BaseResultMap">
+        select
+        <!--引用SQL片段-->
+        <include refid="BaseColumn"/>
+        from items
+        where item_name like '%${keyWord}%'
+    </select>
+
+    <select id="listByCategory" resultMap="BaseResultMap">
+        select
+        <!--引用SQL片段-->
+        <include refid="BaseColumn"/>
+        from items
+        where cat_id = #{categoryId}
+    </select>
+
 </mapper>

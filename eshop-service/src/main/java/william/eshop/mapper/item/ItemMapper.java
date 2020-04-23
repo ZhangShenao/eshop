@@ -15,4 +15,14 @@ import william.eshop.model.item.Item;
  */
 public interface ItemMapper extends Mapper<Item>, MySqlMapper<Item> {
     List<Item> listByRootCategory(@Param("rootCategoryId") long rootCategoryId);
+
+    /**
+     * 根据关键词查询
+     */
+    List<Item> searchByKeyWord(@Param("keyWord") String keyWord);
+
+    /**
+     * 根据关键词查询
+     */
+    List<Item> listByCategory(@Param("categoryId") int categoryId);
 }

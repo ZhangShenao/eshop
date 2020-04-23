@@ -11,7 +11,10 @@ import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import william.eshop.constants.CommonFlag;
+import william.eshop.constants.ItemSortType;
 import william.eshop.mapper.item.ItemImageMapper;
 import william.eshop.mapper.item.ItemMapper;
 import william.eshop.mapper.item.ItemParamMapper;
@@ -23,6 +26,7 @@ import william.eshop.model.item.ItemSpec;
 import william.eshop.service.item.ItemService;
 import william.eshop.vo.item.ItemDetailVO;
 import william.eshop.vo.item.ItemImageVO;
+import william.eshop.vo.item.ItemSimpleVO;
 import william.eshop.vo.item.ItemSpecVO;
 
 /**
@@ -61,7 +65,7 @@ public class ItemServiceImpl implements ItemService {
             return Optional.empty();
         }
 
-        return Optional.of(buildItemDetail(model));
+        return Optional.of(buildDetailInfo(model));
     }
 
     @Override
@@ -83,7 +87,27 @@ public class ItemServiceImpl implements ItemService {
         return specMapper.listByItemId(itemId);
     }
 
-    private ItemDetailVO buildItemDetail(Item item) {
+    @Override
+    public List<ItemSimpleVO> search(String keyWord, int sort) {
+        return Optional.ofNullable(itemMapper.searchByKeyWord(keyWord))
+                .orElse(Collections.emptyList())
+                .stream()
+                .map(this::buildSimpleInfo)
+                .sorted(determineComparator(sort))
+                .collect(toList());
+    }
+
+    @Override
+    public List<ItemSimpleVO> listByCategory(int categoryId, int sort) {
+        return Optional.ofNullable(itemMapper.listByCategory(categoryId))
+                .orElse(Collections.emptyList())
+                .stream()
+                .map(this::buildSimpleInfo)
+                .sorted(determineComparator(sort))
+                .collect(toList());
+    }
+
+    private ItemDetailVO buildDetailInfo(Item item) {
         //基本信息
         ItemDetailVO vo = item.toVO();
 
@@ -98,5 +122,34 @@ public class ItemServiceImpl implements ItemService {
         List<ItemSpecVO> specs = spec(item.getId()).stream().map(ItemSpec::toVO).collect(toList());
         vo.setSpecs(specs);
         return vo;
+    }
+
+    private ItemSimpleVO buildSimpleInfo(Item item) {
+        //基本信息
+        ItemSimpleVO vo = item.toSimpleVO();
+
+        //主图
+        listImage(item.getId()).stream()
+                .filter(i -> CommonFlag.YES.getValue() == i.getIsMain())
+                .findAny()
+                .ifPresent(i -> vo.setMainImageUrl(i.getUrl()));
+
+        //最低价
+        spec(item.getId()).stream()
+                .map(ItemSpec::getPriceDiscount)
+                .reduce(Long::min)
+                .ifPresent(vo::setLowestPrice);
+        return vo;
+    }
+
+    private Comparator<ItemSimpleVO> determineComparator(int sort) {
+        ItemSortType sortType = ItemSortType.getByValue(sort);
+        if (ItemSortType.SALES_COUNT_DESC == sortType) {
+            return Comparator.comparingLong(ItemSimpleVO::getSellCounts).reversed();
+        }
+        if (ItemSortType.PRICE_ASC == sortType) {
+            return Comparator.comparingLong(ItemSimpleVO::getLowestPrice);
+        }
+        return Comparator.comparingLong(ItemSimpleVO::getUpdateTime).reversed();
     }
 }
