@@ -18,4 +18,14 @@ public interface ItemCommentMapper extends Mapper<ItemComment>, MySqlMapper<Item
      * 查询指定商品的评价列表
      */
     List<ItemComment> listByItemId(@Param("itemId") String itemId);
+
+    /**
+     * 查询商品的评价总数
+     */
+    Long countByItem(@Param("itemId") String itemId);
+
+    /**
+     * 根据评价等级,查询商品的评价总数
+     */
+    Long countByItemAndLevel(@Param("itemId") String itemId, @Param("level") int level);
 }

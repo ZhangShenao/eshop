@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiOperation;
 import william.eshop.model.item.ItemComment;
 import william.eshop.rest.CommonRestResponse;
 import william.eshop.service.item.ItemCommentService;
+import william.eshop.vo.item.ItemCommentStatisticsVO;
 import william.eshop.vo.item.ItemCommentVO;
 
 /**
@@ -23,12 +24,18 @@ import william.eshop.vo.item.ItemCommentVO;
  * @Date 2019-12-03
  * @Description 商品评价API
  */
-@Api(value = "商品评价相关接口")
+@Api(value = "商品评价相关接口", tags = "商品评价相关接口")
 @RestController
-@RequestMapping("/itemComment")
+@RequestMapping("/comment")
 public class ItemCommentController {
     @Autowired
     private ItemCommentService commentService;
+
+    @GetMapping("/countByItem/{itemId}")
+    @ApiOperation(value = "商品评价数量统计", httpMethod = "GET")
+    public CommonRestResponse<ItemCommentStatisticsVO> countByItem(@PathVariable("itemId") String itemId) {
+        return CommonRestResponse.ok(commentService.countByItem(itemId));
+    }
 
     @GetMapping("/listByItem/{itemId}")
     @ApiOperation(value = "查询指定商品的评价列表", httpMethod = "GET")
