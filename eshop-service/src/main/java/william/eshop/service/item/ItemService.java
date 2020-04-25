@@ -55,4 +55,9 @@ public interface ItemService {
      * 查询分类下的所有商品
      */
     List<ItemSimpleVO> listByCategory(int categoryId, int sort);
+
+    /**
+     * 根据id查询规格列表
+     */
+    List<ItemSpec> listSpecInIds(List<String> specIds);
 }

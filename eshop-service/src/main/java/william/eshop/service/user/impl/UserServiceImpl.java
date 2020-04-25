@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import william.eshop.mapper.user.UserMapper;
 import william.eshop.model.user.User;
-import william.eshop.param.UserParam;
+import william.eshop.param.user.UserParam;
 import william.eshop.service.user.UserService;
 import william.eshop.utils.MD5Utils;
 

@@ -18,5 +18,9 @@ public interface UserConstants {
     //密码最小长度
     int PASSWORD_MIN_LENGTH = 6;
 
+    //用户id的cookie key
     String USER_ID_COOKIE_KEY = "uid";
+
+    //用户购物车的cookie key
+    String USER_SHOPPING_CART_COOKIE_KEY_FORMAT = "cart_%s";
 }

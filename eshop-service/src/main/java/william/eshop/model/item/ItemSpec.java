@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 
 import lombok.Data;
 import william.eshop.vo.item.ItemSpecVO;
+import william.eshop.vo.shoppingcart.ShoppingCartItemVO;
 
 /**
  * @Author zhangshenao
@@ -40,6 +41,14 @@ public class ItemSpec {
     public ItemSpecVO toVO() {
         ItemSpecVO vo = new ItemSpecVO();
         BeanUtils.copyProperties(this, vo);
+        return vo;
+    }
+
+    public ShoppingCartItemVO toShoppingCartItemVO() {
+        ShoppingCartItemVO vo = new ShoppingCartItemVO();
+        BeanUtils.copyProperties(this, vo);
+        vo.setItemSpecId(id);
+        vo.setItemSpecName(name);
         return vo;
     }
 }

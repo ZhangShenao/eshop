@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import org.springframework.beans.BeanUtils;
 
 import lombok.Data;
-import william.eshop.param.CommitOrderParam;
+import william.eshop.param.order.CommitOrderParam;
 
 /**
  * @Author zhangshenao

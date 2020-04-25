@@ -107,6 +107,11 @@ public class ItemServiceImpl implements ItemService {
                 .collect(toList());
     }
 
+    @Override
+    public List<ItemSpec> listSpecInIds(List<String> specIds) {
+        return Optional.ofNullable(specMapper.listInIds(specIds)).orElse(Collections.emptyList());
+    }
+
     private ItemDetailVO buildDetailInfo(Item item) {
         //基本信息
         ItemDetailVO vo = item.toVO();

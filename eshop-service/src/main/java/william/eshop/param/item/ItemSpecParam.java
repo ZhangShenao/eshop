@@ -1,4 +1,4 @@
-package william.eshop.param;
+package william.eshop.param.item;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

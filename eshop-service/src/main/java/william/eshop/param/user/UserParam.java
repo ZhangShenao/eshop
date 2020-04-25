@@ -1,4 +1,4 @@
-package william.eshop.param;
+package william.eshop.param.user;
 
 import static william.eshop.constants.UserConstants.DEFAULT_BIRTHDAY_STRING;
 import static william.eshop.constants.UserConstants.DEFAULT_GENDER;

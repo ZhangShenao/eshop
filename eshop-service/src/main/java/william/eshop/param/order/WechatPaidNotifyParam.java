@@ -1,4 +1,4 @@
-package william.eshop.param;
+package william.eshop.param.order;
 
 import org.springframework.util.StringUtils;
 

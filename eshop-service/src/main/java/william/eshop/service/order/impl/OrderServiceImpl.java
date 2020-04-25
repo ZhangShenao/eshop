@@ -27,8 +27,8 @@ import william.eshop.model.order.Order;
 import william.eshop.model.order.OrderItem;
 import william.eshop.model.order.OrderStatus;
 import william.eshop.model.user.User;
-import william.eshop.param.CommitOrderParam;
-import william.eshop.param.ItemSpecParam;
+import william.eshop.param.order.CommitOrderParam;
+import william.eshop.param.item.ItemSpecParam;
 import william.eshop.service.user.UserService;
 import william.eshop.service.order.OrderService;
 

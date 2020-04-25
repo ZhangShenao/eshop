@@ -3,7 +3,7 @@ package william.eshop.service.user;
 import java.util.Optional;
 
 import william.eshop.model.user.User;
-import william.eshop.param.UserParam;
+import william.eshop.param.user.UserParam;
 
 /**
  * @Author zhangshenao
