@@ -1,4 +1,4 @@
-package william.eshop.param;
+package william.eshop.param.order;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.util.StringUtils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import william.eshop.param.item.ItemSpecParam;
 
 /**
  * @Author zhangshenao

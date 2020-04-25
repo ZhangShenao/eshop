@@ -22,7 +22,8 @@ public enum ResultCode {
     ILLEGAL_FILE_STATUS(13, "文件状态异常"),
     UNSUPPORTED_FILE_TYPE(14, "文件类型不支持"),
     UPLOAD_FILE_FAIL(15, "文件上传失败,请稍后重试"),
-    FILE_TOO_LARGE(16, "文件大小超出上限,请压缩后重试"),;
+    FILE_TOO_LARGE(16, "文件大小超出上限,请压缩后重试"),
+    SHOPPING_CART_NOT_EXISTS(17, "购物车不存在"),;
 
     private int code;
     private String msg;
