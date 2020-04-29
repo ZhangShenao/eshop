@@ -1814,7 +1814,7 @@ CREATE TABLE `user_address` (
   `city` varchar(32) NOT NULL COMMENT '城市',
   `district` varchar(32) NOT NULL COMMENT '区县',
   `detail` varchar(128) NOT NULL COMMENT '详细地址',
-  `extand` varchar(128) DEFAULT NULL COMMENT '扩展字段',
+  `extend` varchar(128) DEFAULT NULL COMMENT '扩展字段',
   `is_default` int(11) DEFAULT NULL COMMENT '是否默认地址',
   `created_time` datetime NOT NULL COMMENT '创建时间',
   `updated_time` datetime NOT NULL COMMENT '更新时间',
