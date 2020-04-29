@@ -36,6 +36,7 @@ public class Carousel {
     private int isShow; //是否展示
 
     private Date createTime;    //创建时间
+
     private Date updateTime;    //更新时间
 
     public CarouselVO toVO() {
