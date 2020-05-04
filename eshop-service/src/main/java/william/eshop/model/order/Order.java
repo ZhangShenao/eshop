@@ -42,7 +42,7 @@ public class Order {
 
     private String leftMsg; //买家留言
 
-    private String extand;  //扩展字段
+    private String extend;  //扩展字段
 
     private int isComment;  //买家是否评价;1：已评价，0：未评价
 

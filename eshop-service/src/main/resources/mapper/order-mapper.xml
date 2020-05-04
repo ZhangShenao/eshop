@@ -13,7 +13,7 @@
         <result column="post_amount" property="postAmount"/>
         <result column="pay_method" property="payMethod"/>
         <result column="left_msg" property="leftMsg"/>
-        <result column="extand" property="extand"/>
+        <result column="extend" property="extend"/>
         <result column="is_comment" property="isComment"/>
         <result column="is_delete" property="isDelete"/>
         <result column="created_time" property="createdTime"/>
@@ -21,7 +21,7 @@
     </resultMap>
 
     <sql id="BaseColumn">
-        id, user_id, receiver_name, receiver_mobile, receiver_address, total_amount, real_pay_amount, post_amount, pay_method, left_msg, extand, is_comment, is_delete, created_time, updated_time
+        `id`, `user_id`, `receiver_name`, `receiver_mobile`, `receiver_address`, `total_amount`, `real_pay_amount`, `post_amount`, `pay_method`, `left_msg`, `extend`, `is_comment`, `is_delete`, `created_time`, `updated_time`
     </sql>
 
 </mapper>

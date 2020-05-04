@@ -35,7 +35,7 @@ import william.eshop.service.passport.PassportService;
  * @Date 2019-12-10
  * @Description 订单API
  */
-@Api(value = "订单相关接口")
+@Api(value = "订单相关接口", tags = "订单相关接口")
 @RestController
 @RequestMapping("/order")
 public class OrderController {
@@ -59,7 +59,7 @@ public class OrderController {
             return CommonRestResponse.error(PAY_METHOD_NOT_SUPPORTED);
         }
 
-        //2. 校验提交参数
+        //3. 校验提交参数
         if (param.isIllegal()) {
             return CommonRestResponse.error(INVALID_PARAM);
         }
