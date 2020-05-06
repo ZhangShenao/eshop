@@ -18,10 +18,12 @@ import org.springframework.util.CollectionUtils;
 
 import lombok.extern.slf4j.Slf4j;
 import william.eshop.exception.OrderException;
+import william.eshop.mapper.address.UserAddressMapper;
 import william.eshop.mapper.item.ItemSpecMapper;
 import william.eshop.mapper.order.OrderItemMapper;
 import william.eshop.mapper.order.OrderMapper;
 import william.eshop.mapper.order.OrderStatusMapper;
+import william.eshop.model.address.UserAddress;
 import william.eshop.model.item.ItemSpec;
 import william.eshop.model.order.Order;
 import william.eshop.model.order.OrderItem;
@@ -55,29 +57,40 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private ItemSpecMapper itemSpecMapper;
 
+    @Autowired
+    private UserAddressMapper addressMapper;
+
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)  //增加事务
-    public Optional<String> create(CommitOrderParam param) {
+    @Transactional(propagation = Propagation.REQUIRED)  //增加事务,库存不足时自动回滚
+    public Optional<String> create(String userId, CommitOrderParam param) {
         //1. 参数校验
         if (param.isIllegal()) {
             return Optional.empty();
         }
 
         //2. 下单用户校验
-        Optional<User> user = userService.queryById(param.getUserId());
+        Optional<User> user = userService.queryById(userId);
         if (!user.isPresent()) {
-            log.error("下单用户不存在! userId: {}", param.getUserId());
+            log.error("下单用户不存在! userId: {}", userId);
             return Optional.empty();
         }
 
-        //3. 创建Order
-        Order order = Order.newInstance(param);
+        //3. 查询用户地址
+        UserAddress address = addressMapper.selectByPrimaryKey(param.getAddressId());
+        if (address == null || !userId.equals(address.getUserId())) {
+            log.error("收货地址不存在! userId: {}", userId);
+            return Optional.empty();
+        }
 
-        //4. 创建OrderItem
+        //4. 创建Order
+        Order order = Order.newInstance(param, address);
+
+        //5. 创建OrderItem
         Map<String, ItemSpecParam> specs = param.getItemSpecs().stream()
                 .collect(toMap(ItemSpecParam::getItemSpecId, p -> p));
         List<ItemSpec> itemSpecs = itemSpecMapper.listInIds(new ArrayList<>(specs.keySet()));
         if (CollectionUtils.isEmpty(itemSpecs)) {
+            log.error("下单商品为空! userId: {}", userId);
             return Optional.empty();
         }
         List<OrderItem> orderItems = itemSpecs.stream()

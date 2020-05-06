@@ -15,7 +15,7 @@ public interface OrderService {
     /**
      * 创建订单,如果创建成功,则返回订单id
      */
-    Optional<String> create(CommitOrderParam param);
+    Optional<String> create(String userId, CommitOrderParam param);
 
     /**
      * 更新订单状态

@@ -3,14 +3,14 @@ package william.eshop.model.order;
 import static william.eshop.constants.CommonFlag.NO;
 
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.beans.BeanUtils;
-
 import lombok.Data;
+import william.eshop.model.address.UserAddress;
 import william.eshop.param.order.CommitOrderParam;
 
 /**
@@ -52,15 +52,20 @@ public class Order {
 
     private Date updatedTime;   //更新时间
 
-    public static Order newInstance(CommitOrderParam param) {
+    public static Order newInstance(CommitOrderParam param, UserAddress address) {
         Order order = new Order();
-        BeanUtils.copyProperties(param, order);
+        order.userId = address.getUserId();
+        order.receiverName = address.getReceiver();
+        order.receiverMobile = address.getMobile();
+        order.receiverAddress = address.getDetail();
+        order.payMethod = param.getPayMethod();
+        order.postAmount = 0L;      //所有商品均包邮,邮费为0
         order.id = UUID.randomUUID().toString();
         order.isComment = NO.getValue();
         order.isDelete = NO.getValue();
         order.createdTime = new Date();
         order.updatedTime = new Date();
-        order.postAmount = 0L;      //所有商品均包邮,邮费为0
+        Optional.ofNullable(param.getLeftMsg()).ifPresent(order::setLeftMsg);
         return order;
     }
 }

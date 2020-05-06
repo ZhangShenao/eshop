@@ -45,11 +45,12 @@ public class OrderController {
     @Autowired
     private PassportService passportService;
 
-    @PostMapping("/commit")
+    @PostMapping
     @ApiOperation(value = "提交订单", httpMethod = "POST")
     public CommonRestResponse commit(@RequestBody CommitOrderParam param, HttpServletRequest request) {
         //1. 校验登录状态
-        if (!passportService.isLogin(request)) {
+        Optional<String> userId = passportService.parseUserIdFromCookie(request);
+        if (!userId.isPresent()) {
             return CommonRestResponse.error(NOT_LOGIN);
 
         }
@@ -65,7 +66,7 @@ public class OrderController {
         }
 
         //4. 创建订单
-        Optional<String> orderId = orderService.create(param);
+        Optional<String> orderId = orderService.create(userId.get(), param);
         if (!orderId.isPresent()) {
             return CommonRestResponse.error(CREATE_ORDER_FAIL);
         }
