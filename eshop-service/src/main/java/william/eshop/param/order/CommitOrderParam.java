@@ -18,17 +18,8 @@ import william.eshop.param.item.ItemSpecParam;
 @Data
 @ApiModel(value = "CommitOrderParam", description = "提交订单请求参数")
 public class CommitOrderParam {
-    @ApiModelProperty(value = "买家用户id", name = "userId", required = true)
-    private String userId;
-
-    @ApiModelProperty(value = "收货人姓名", name = "receiverName", required = true)
-    private String receiverName;
-
-    @ApiModelProperty(value = "收货人手机号", name = "receiverMobile", required = true)
-    private String receiverMobile;
-
-    @ApiModelProperty(value = "收货地址", name = "receiverAddress", required = true)
-    private String receiverAddress;
+    @ApiModelProperty(value = "收货地址id", name = "addressId", required = true)
+    private String addressId;
 
     @ApiModelProperty(value = "商品规格列表", name = "itemSpecIds", required = true)
     private List<ItemSpecParam> itemSpecs;
@@ -40,8 +31,7 @@ public class CommitOrderParam {
     private String leftMsg;
 
     public boolean isIllegal() {
-        if (StringUtils.isEmpty(userId) || StringUtils.isEmpty(receiverName) || StringUtils.isEmpty(receiverMobile)
-                || StringUtils.isEmpty(receiverAddress)) {
+        if (StringUtils.isEmpty(addressId)) {
             return true;
         }
         if (CollectionUtils.isEmpty(itemSpecs)) {
