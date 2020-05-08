@@ -158,6 +158,11 @@ public class OrderServiceImpl implements OrderService {
         if (orderStatus == null) {
             return false;
         }
+
+        //只关闭待付款状态的订单
+        if (OrderStatusEnum.WAIT_PAY.getValue() != orderStatus.getOrderStatus()) {
+            return false;
+        }
         orderStatus.setOrderStatus(OrderStatusEnum.CLOSED.getValue());
         orderStatus.setCloseTime(new Date());
         return (orderStatusMapper.updateByPrimaryKey(orderStatus) > 0);

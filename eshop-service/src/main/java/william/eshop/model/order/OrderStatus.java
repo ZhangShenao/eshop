@@ -19,6 +19,8 @@ import william.eshop.vo.vo.OrderStatusVO;
 @Data
 @Table(name = "order_status")
 public class OrderStatus {
+    private static final long ORDER_TIMEOUT_IN_HOURS = 2L;  //订单超时时间
+
     @Id
     private String orderId;    //订单id,对应订单表的主键id
 
@@ -51,5 +53,10 @@ public class OrderStatus {
         OrderStatusEnum statusEnum = OrderStatusEnum.findByValue(orderStatus);
         vo.setDesc(statusEnum.getName());
         return vo;
+    }
+
+    public boolean isTimeout() {
+        long past = System.currentTimeMillis() - createdTime.getTime();
+        return (OrderStatusEnum.WAIT_PAY.getValue() == orderStatus && past >= ORDER_TIMEOUT_IN_HOURS);
     }
 }
