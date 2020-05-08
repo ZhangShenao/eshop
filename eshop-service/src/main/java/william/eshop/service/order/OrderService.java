@@ -3,7 +3,7 @@ package william.eshop.service.order;
 import java.util.List;
 import java.util.Optional;
 
-import william.eshop.constants.OrderStatus;
+import william.eshop.constants.OrderStatusEnum;
 import william.eshop.param.order.CommitOrderParam;
 
 /**
@@ -20,7 +20,7 @@ public interface OrderService {
     /**
      * 更新订单状态
      */
-    boolean updateOrderStatus(String orderId, OrderStatus orderStatus);
+    boolean updateOrderStatus(String orderId, OrderStatusEnum orderStatus);
 
     /**
      * 查询订单状态
