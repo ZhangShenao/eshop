@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import lombok.extern.slf4j.Slf4j;
+import william.eshop.constants.OrderStatusEnum;
 import william.eshop.exception.OrderException;
 import william.eshop.mapper.address.UserAddressMapper;
 import william.eshop.mapper.item.ItemSpecMapper;
@@ -118,7 +119,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean updateOrderStatus(String orderId, william.eshop.constants.OrderStatus orderStatus) {
+    public boolean updateOrderStatus(String orderId, OrderStatusEnum orderStatus) {
         OrderStatus model = orderStatusMapper.selectByPrimaryKey(orderId);
         if (model == null) {
             log.error("Order Status Empty! orderId: {}", orderId);
@@ -132,7 +133,10 @@ public class OrderServiceImpl implements OrderService {
         }
 
         model.setOrderStatus(orderStatus.getValue());
-        model.setPayTime(new Date());
+
+        if (OrderStatusEnum.WAIT_DELIVER == orderStatus) {
+            model.setPayTime(new Date());
+        }
         orderStatusMapper.updateByPrimaryKey(model);
         return true;
     }
@@ -154,7 +158,7 @@ public class OrderServiceImpl implements OrderService {
         if (orderStatus == null) {
             return false;
         }
-        orderStatus.setOrderStatus(william.eshop.constants.OrderStatus.CLOSED.getValue());
+        orderStatus.setOrderStatus(OrderStatusEnum.CLOSED.getValue());
         orderStatus.setCloseTime(new Date());
         return (orderStatusMapper.updateByPrimaryKey(orderStatus) > 0);
     }

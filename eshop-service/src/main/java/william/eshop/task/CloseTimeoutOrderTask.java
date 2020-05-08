@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
+import william.eshop.constants.OrderStatusEnum;
 import william.eshop.model.order.OrderStatus;
 import william.eshop.service.order.OrderService;
 import william.eshop.utils.DateUtils;
@@ -34,7 +35,7 @@ public class CloseTimeoutOrderTask {
     private boolean isTimeoutOrder(OrderStatus orderStatus) {
         Date createdTime = orderStatus.getCreatedTime();
         long past = System.currentTimeMillis() - createdTime.getTime();
-        return william.eshop.constants.OrderStatus.WAIT_PAY.getValue() == orderStatus.getOrderStatus()
+        return OrderStatusEnum.WAIT_PAY.getValue() == orderStatus.getOrderStatus()
                 && past >= ORDER_TIMEOUT_IN_HOURS;
     }
 }

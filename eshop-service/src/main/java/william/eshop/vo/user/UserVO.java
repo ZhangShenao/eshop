@@ -7,10 +7,10 @@ import lombok.Data;
 /**
  * @Author zhangshenao
  * @Date 2019-11-25
- * @Description
+ * @Description 用户信息VO
  */
 @Data
-@ApiModel(value = "UserVO", description = "用户VO")
+@ApiModel(value = "UserVO", description = "用户信息VO")
 public class UserVO {
     @ApiModelProperty(value = "用户id", name = "id", required = true)
     private String id;

@@ -1,6 +1,6 @@
 package william.eshop.model.order;
 
-import static william.eshop.constants.OrderStatus.WAIT_PAY;
+import static william.eshop.constants.OrderStatusEnum.WAIT_PAY;
 
 import java.util.Date;
 
@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
+import william.eshop.constants.OrderStatusEnum;
+import william.eshop.vo.vo.OrderStatusVO;
 
 /**
  * @Author zhangshenao
@@ -40,5 +42,14 @@ public class OrderStatus {
         model.orderStatus = WAIT_PAY.getValue();
         model.createdTime = new Date();
         return model;
+    }
+
+    public OrderStatusVO toVO() {
+        OrderStatusVO vo = new OrderStatusVO();
+        vo.setOrderId(orderId);
+        vo.setStatus(orderStatus);
+        OrderStatusEnum statusEnum = OrderStatusEnum.findByValue(orderStatus);
+        vo.setDesc(statusEnum.getName());
+        return vo;
     }
 }

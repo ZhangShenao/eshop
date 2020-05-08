@@ -1,11 +1,13 @@
 package william.eshop.constants;
 
+import java.util.Arrays;
+
 /**
  * @Author zhangshenao
  * @Date 2019-12-11
  * @Description 订单状态枚举
  */
-public enum OrderStatus {
+public enum OrderStatusEnum {
     WAIT_PAY(10, "待付款"),
     WAIT_DELIVER(20, "已付款,待发货"),
     WAIT_RECEIVE(30, "已发货,待收货"),
@@ -16,7 +18,7 @@ public enum OrderStatus {
     private int value;
     public String name;
 
-    OrderStatus(int value, String name) {
+    OrderStatusEnum(int value, String name) {
         this.value = value;
         this.name = name;
     }
@@ -27,5 +29,9 @@ public enum OrderStatus {
 
     public String getName() {
         return name;
+    }
+
+    public static OrderStatusEnum findByValue(int value) {
+        return Arrays.stream(values()).filter(x -> x.value == value).findFirst().orElse(UNKNOWN);
     }
 }
