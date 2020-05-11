@@ -1,6 +1,7 @@
 package william.eshop.controller;
 
 import static william.eshop.rest.ResultCode.ILLEGAL_FILE_STATUS;
+import static william.eshop.rest.ResultCode.INVALID_PARAM;
 import static william.eshop.rest.ResultCode.UNSUPPORTED_FILE_TYPE;
 import static william.eshop.rest.ResultCode.UPLOAD_FILE_FAIL;
 import static william.eshop.rest.ResultCode.USER_NOT_EXISTS;
@@ -33,6 +34,7 @@ import william.eshop.resource.FileUploadResource;
 import william.eshop.rest.CommonRestResponse;
 import william.eshop.service.user.UserService;
 import william.eshop.utils.FileUtils;
+import william.eshop.vo.user.UserVO;
 
 /**
  * @Author zhangshenao
@@ -41,7 +43,7 @@ import william.eshop.utils.FileUtils;
  */
 @RestController
 @RequestMapping("/uc")
-@Api(value = "用户中心相关接口")
+@Api(value = "用户中心相关接口", tags = "用户中心相关接口")
 @Slf4j
 public class UserCenterController {
     @Autowired
@@ -52,7 +54,7 @@ public class UserCenterController {
 
     @GetMapping("/userInfo/{userId}")
     @ApiOperation(value = "查询用户信息", httpMethod = "GET")
-    public CommonRestResponse userInfo(@PathVariable String userId) {
+    public CommonRestResponse<UserVO> userInfo(@PathVariable String userId) {
         Optional<User> user = userService.queryById(userId);
         if (!user.isPresent()) {
             return CommonRestResponse.error(USER_NOT_EXISTS);
@@ -62,19 +64,20 @@ public class UserCenterController {
 
     @PutMapping("/userInfo/{userId}")
     @ApiOperation(value = "修改用户信息", httpMethod = "PUT")
-    public CommonRestResponse modifyUserInfo(@PathVariable String userId, @Valid @RequestBody UserParam param,
-            BindingResult bindingResult) {
+    public CommonRestResponse modifyUserInfo(@PathVariable String userId,
+            /*开启参数校验*/ @Valid @RequestBody UserParam param,
+            /*接收参数校验结果*/ BindingResult bindingResult) {
         if (bindingResult != null && bindingResult.hasErrors()) {
             return CommonRestResponse.error(bindingResult);
         }
-        userService.modifyUserInfo(userId, param);
-        return CommonRestResponse.ok();
+        boolean succ = userService.modifyUserInfo(userId, param);
+        return succ ? CommonRestResponse.ok() : CommonRestResponse.error(INVALID_PARAM);
     }
 
     @PutMapping("/updateHead/{userId}")
     @ApiOperation(value = "修改头像", httpMethod = "PUT")
-    public CommonRestResponse updateHead(@PathVariable String userId, @RequestParam MultipartFile file) {
-        //文件类型校验
+    public CommonRestResponse updateHead(@PathVariable String userId, @RequestParam /*文件上传采用MultipartFile类型*/MultipartFile file) {
+        //文件类型校验,防止非法文件上传攻击
         if (file == null || StringUtils.isEmpty(file.getOriginalFilename())) {
             return CommonRestResponse.error(ILLEGAL_FILE_STATUS);
         }
