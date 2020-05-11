@@ -72,6 +72,9 @@ public class UserServiceImpl implements UserService {
         if (StringUtils.hasText(param.getEmail())) {
             model.setEmail(param.getEmail());
         }
+        if (param.getSex() > 0) {
+            model.setSex(param.getSex());
+        }
         model.setUpdatedTime(new Date());
         return (userMapper.updateByPrimaryKey(model) > 0);
     }

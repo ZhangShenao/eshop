@@ -53,6 +53,7 @@ public class UserParam {
     private String nickname;
 
     @Length(max = 12, message = "用户真实姓名不能超过12位")
+    @NotBlank(message = "真实姓名不能为空")
     @ApiModelProperty(value = "真实姓名", name = "realName", example = "杰森")
     private String realName;
 
@@ -60,7 +61,7 @@ public class UserParam {
     @ApiModelProperty(value = "手机号", name = "mobile", example = "13999999999")
     private String mobile;
 
-    @Email
+    @Email(message = "邮箱格式不正确")
     @ApiModelProperty(value = "邮箱地址", name = "email", example = "imooc@imooc.com")
     private String email;
 
