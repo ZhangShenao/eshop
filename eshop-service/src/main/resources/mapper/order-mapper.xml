@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="william.eshop.mapper.order.OrderMapper">
+    <!--结果集映射-->
+    <resultMap id="BaseResultMap" type="william.eshop.model.order.Order">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="receiver_name" property="receiverName"/>
+        <result column="receiver_mobile" property="receiverMobile"/>
+        <result column="receiver_address" property="receiverAddress"/>
+        <result column="total_amount" property="totalAmount"/>
+        <result column="real_pay_amount" property="realPayAmount"/>
+        <result column="post_amount" property="postAmount"/>
+        <result column="pay_method" property="payMethod"/>
+        <result column="left_msg" property="leftMsg"/>
+        <result column="extend" property="extend"/>
+        <result column="is_comment" property="isComment"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="updated_time" property="updatedTime"/>
+    </resultMap>
+
+    <sql id="BaseColumn">
+        `id`, `user_id`, `receiver_name`, `receiver_mobile`, `receiver_address`, `total_amount`, `real_pay_amount`, `post_amount`, `pay_method`, `left_msg`, `extend`, `is_comment`, `is_delete`, `created_time`, `updated_time`
+    </sql>
+
+</mapper>
